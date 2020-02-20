@@ -22,7 +22,7 @@ class CrawlController extends Controller
         $product->productURL = $request->get('url');
         $product->provider = "hepsiburada";
         $product->title = $name;
-        $product->last_receive = now();
+        $product->last_receive = now()->subSeconds(3600);
         $product->save();
 
         return "Product with ID: ". strval($product->id) ." successfully added to tracking table. Current Price: " . $price . ", Current Title: " . $name . "";
