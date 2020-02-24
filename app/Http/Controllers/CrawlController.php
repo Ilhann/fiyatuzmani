@@ -23,6 +23,8 @@ class CrawlController extends Controller
         $product->provider = "hepsiburada";
         $product->title = $name;
         $product->last_receive = now()->subSeconds(3600);
+        $product->source = "url";
+        $product->productid = $crawler->filter('input[name=sku]')->attr('value');
         $product->save();
 
         return "Product with ID: ". strval($product->id) ." successfully added to tracking table. Current Price: " . $price . ", Current Title: " . $name . "";

@@ -35,12 +35,15 @@ class CrawlHepsiburada implements ShouldQueue
     {
         Log::debug($this->id);
         $prd = \App\Product::find($this->id);
-        Log::debug($prd->id ."has arrived. Lets crawl!");
+        Log::debug($prd->id ." has arrived. Lets crawl!");
         $client = new \Goutte\Client();
         Log::debug($prd->productURL);
         $client->setHeader('User-Agent', "Mozilla/5.0 (Windows NT 10.1; Win64; x64) AppleWebKit/538.18 (KHTML, like Gecko) Chrome/83.0.4813.110 Safari/538.18");
         $crawler = $client->request('GET', $prd->productURL);
         $product_price = $crawler->filter('#offering-price')->attr('content');
+        if($prd->productid == ""){
+            $prd->productid = $crawler->filter('input[name=sku]')->attr('value');
+        }
         Log::debug("Price Found: ".$product_price);
         Log::debug($prd->id ." crawl complete. Creating database entry");
 
