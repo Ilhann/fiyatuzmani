@@ -51,7 +51,11 @@ class HepsiburadaDiscoveryService implements ShouldQueue
         Log::debug("Discovery proceed for: ".$this->id);
         
         $products = $output->data->placements[0]->products;
-        $product = $products[random_int(0, count($products))];
+        if(!$product_count = count($products)){
+            Log::debug("No suggestions from Hepsiburada for: ".$this->id);
+            return;
+        }
+        $product = $products[random_int(0, $product_count)];
 
         if($apps = \App\Product::where('productURL', $product->productUrl)->first()){
             return;
