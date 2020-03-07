@@ -53,16 +53,16 @@ class HepsiburadaDiscoveryService implements ShouldQueue
         $products = $output->data->placements[0]->products;
         $product = $products[random_int(0, count($products))];
 
+        if($apps = \App\Product::where('productURL', $product->productUrl)->first()){
+            return;
+        }
+
         Log::debug("Discovery service discovered: ".$product->productUrl);
             
         $goutte_client = new \Goutte\Client();
         $goutte_client->setHeader('User-Agent', "Mozilla/5.0 (Windows NT 10.1; Win64; x64) AppleWebKit/538.18 (KHTML, like Gecko) Chrome/82.0.4813.110 Safari/538.18");
         $crawler = $goutte_client->request('GET', $product->productUrl);
         $name = $crawler->filter('#product-name')->text();
-
-        if($apps = \App\Product::where('productURL', $product->productUrl)->first()){
-            return;
-        }
 
         $_product = new \App\Product;
         $_product->productURL = $product->productUrl;
