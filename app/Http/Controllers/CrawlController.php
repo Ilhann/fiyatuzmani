@@ -16,7 +16,7 @@ class CrawlController extends Controller
         $name = $crawler->filter('#product-name')->text();
 
         if($apps = \App\Product::where('productURL', $request->get('url'))->first()){
-            return strval($apps);
+            return "Product already exists. Details:\n".strval($apps);
         }
         $product = new \App\Product;
         $product->productURL = $request->get('url');
@@ -24,7 +24,7 @@ class CrawlController extends Controller
         $product->title = $name;
         $product->last_receive = now()->subSeconds(3600);
         $product->source = "url";
-        $product->productid = $crawler->filter('input[name=sku]')->attr('value');
+        $product->productid = $crawler->filter('input[name=productId]')->attr('value');
         $product->save();
 
         return "Product with ID: ". strval($product->id) ." successfully added to tracking table. Current Price: " . $price . ", Current Title: " . $name . "";
