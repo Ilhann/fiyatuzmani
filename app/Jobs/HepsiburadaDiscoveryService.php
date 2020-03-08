@@ -34,8 +34,8 @@ class HepsiburadaDiscoveryService implements ShouldQueue
      */
     public function handle()
     {
-        $prd_counts = \App\Product::all()->count();
-        if($prd_counts > 10000) return; // 10000 product limit reaced, do not add any products via crawler service
+        $prd_counts = \App\Product::where("source", "=", "discovery")->count();
+        if($prd_counts > 10000) return; // 10000 discovery product limit reached, do not add any products via crawler service
 
         $client = new Client();
         $response = $client->request("GET", "https://recommendation.hepsiburada.com/api/v1/recommendations/withproductinfo?placements=item_page.web-rank1&productId=". $this->id);
@@ -73,6 +73,7 @@ class HepsiburadaDiscoveryService implements ShouldQueue
         $_product->provider = "hepsiburada";
         $_product->title = $name;
         $_product->last_receive = now()->subSeconds(36200);
+        $_product->last_dispatch = now()->subSeconds(186400);
         $_product->source = "discovery";
         $_product->productid = $crawler->filter('input[name=productId]')->attr('value');
         $_product->save();
