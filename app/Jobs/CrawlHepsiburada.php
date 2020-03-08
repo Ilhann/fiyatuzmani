@@ -44,7 +44,7 @@ class CrawlHepsiburada implements ShouldQueue
         try {
             Log::debug($prd->id ." getting price content.");
             $product_price = $crawler->filter('#offering-price')->attr('content');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::debug("Content could not fetched. Details:". $e->getMessage());
             return;
         }

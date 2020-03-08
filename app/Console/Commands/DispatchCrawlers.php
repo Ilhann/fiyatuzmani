@@ -39,16 +39,18 @@ class DispatchCrawlers extends Command
      */
     public function handle()
     {
-        $products = \App\Product::where('last_receive', "<", now()->subSeconds(3612))->get();
+        $products = \App\Product::where('last_receive', "<", now()->subSeconds(3612))->where('source', '=', 'url')->get();
         foreach ($products as $product) {
             CrawlHepsiburada::dispatch($product->id);
             Log::debug("dispatching ".$product->id);
         }
+        /*
         $products = \App\Product::where('last_receive', "<", now()->subSeconds(43214))->where('source', '=', 'discovery')->get();
         foreach ($products as $product) {
             CrawlHepsiburada::dispatch($product->id);
             Log::debug("(DISCOVERY PRODUCT)dispatching ".$product->id);
         }
+        */
         //
     }
 }
