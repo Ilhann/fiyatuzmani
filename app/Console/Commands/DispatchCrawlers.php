@@ -43,7 +43,7 @@ class DispatchCrawlers extends Command
         foreach ($products as $product) {
             $product->last_dispatch = now();
             $product->save();
-            CrawlHepsiburada::dispatch($product->id);
+            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds(3));
             Log::debug("dispatching ".$product->id);
         }
         
@@ -52,7 +52,7 @@ class DispatchCrawlers extends Command
         foreach ($products as $product) {
             $product->last_dispatch = now();
             $product->save();
-            CrawlHepsiburada::dispatch($product->id);
+            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds(3));
             Log::debug("(DISCOVERY PRODUCT)dispatching ".$product->id);
         }
     }
