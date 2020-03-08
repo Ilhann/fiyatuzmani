@@ -48,7 +48,7 @@ class DispatchCrawlers extends Command
         }
         
         $rand_number = random_int(5, 10);
-        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43214))->where('source', '=', 'discovery')->limit($rand_number)->get();
+        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43214))->where('source', '=', 'discovery')->orderBy('last_receive', 'asc')->limit($rand_number)->get();
         foreach ($products as $product) {
             $product->last_dispatch = now();
             $product->save();
