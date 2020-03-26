@@ -20,3 +20,5 @@ Route::get('/ping', function () {
 });
 
 Route::get('/add_product', "CrawlController@add_new");
+Route::get('/price/{id}', ['uses' => "PriceController@get_with_id"]);
+Route::get('/product/search', "ProductController@search_with_name");
