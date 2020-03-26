@@ -47,12 +47,13 @@ class DispatchCrawlers extends Command
             Log::debug("dispatching ".$product->id);
         }
         
-        $rand_number = random_int(5, 10);
+        $rand_number = random_int(12, 20);
         $products = \App\Product::where('last_receive', "<", now()->subSeconds(43214))->where('source', '=', 'discovery')->orderBy('last_receive', 'asc')->limit($rand_number)->get();
         foreach ($products as $product) {
+            $dispatch_delay = random_int(5, 40);
             $product->last_dispatch = now();
             $product->save();
-            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds(3));
+            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds($dispatch_delay));
             Log::debug("(DISCOVERY PRODUCT)dispatching ".$product->id);
         }
     }
