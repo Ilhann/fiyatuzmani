@@ -19,6 +19,7 @@ Route::get('/ping', function () {
     return "pong";
 });
 
-Route::get('/add_product', "CrawlController@add_new");
+Route::get('/hepsiburada/add_product', "CrawlController@add_new_hepsiburada");
+Route::get('/trendyol/add_product', "CrawlController@add_new_trendyol");
 Route::get('/price/{id}', ['uses' => "PriceController@get_with_id"]);
 Route::get('/product/search', "ProductController@search_with_name");

@@ -39,7 +39,7 @@ class CrawlHepsiburada implements ShouldQueue
         Log::debug($prd->id ." has arrived. Lets crawl!");
         $client = new \Goutte\Client();
         Log::debug($prd->productURL);
-        $client->setHeader('User-Agent', "Mozilla/5.0 (Windows NT 10.1; Win64; x64) AppleWebKit/538.18 (KHTML, like Gecko) Chrome/83.0.4813.110 Safari/538.18");
+        $client->setHeader('User-Agent', env('HB_USERAGENT', "FUZM/v1.0r3 Discovery"));
         $crawler = $client->request('GET', $prd->productURL);
 
         try {

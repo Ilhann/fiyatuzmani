@@ -8,9 +8,10 @@ use Goutte\Client;
 class CrawlController extends Controller
 {
     //
-    public function add_new(Request $request){
+    public function add_new_hepsiburada(Request $request){
         $client = new Client();
-        $client->setHeader('User-Agent', "Mozilla/5.0 (Windows NT 10.1; Win64; x64) AppleWebKit/538.18 (KHTML, like Gecko) Chrome/82.0.4813.110 Safari/538.18");
+        $useragent = env('HB_USERAGENT', "FUZM/v1.0r3 Discovery");
+        $client->setHeader('User-Agent', $useragent);
         $crawler = $client->request('GET', $request->get('url'));
         $price = $crawler->filter('#offering-price')->attr('content');
         $name = $crawler->filter('#product-name')->text();
@@ -28,6 +29,30 @@ class CrawlController extends Controller
         $product->save();
 
         return "Product with ID: ". strval($product->id) ." successfully added to tracking table. Current Price: " . $price . ", Current Title: " . $name . "";
+
+    }
+
+    public function add_new_trendyol(Request $request){
+        $client = new Client();
+        $useragent = env('HB_USERAGENT', "FUZM/v1.0r3 Discovery");
+        $client->setHeader('User-Agent', $useragent);
+        $crawler = $client->request('GET', $request->get('url'));
+        $price = $crawler->filter('meta[name="twitter:data1"]')->attr('content');
+        $name = $crawler->filter('.pr-nm')->text();
+
+        if($apps = \App\Product::where('productURL', $request->get('url'))->first()){
+            return "Product already exists. Details:\n".strval($apps);
+        }
+        $product = new \App\Product;
+        $product->productURL = $request->get('url');
+        $product->provider = "trendyol";
+        $product->title = $name;
+        $product->last_receive = now()->subSeconds(90000);
+        $product->source = "url";
+        //$product->productid = $crawler->filter('input[name=productId]')->attr('value');
+        $product->save();
+
+        return "[TRENDYOL] Product with ID: ". strval($product->id) ." successfully added to tracking table. Current Price: " . $price . ", Current Title: " . $name . "";
 
     }
 }
