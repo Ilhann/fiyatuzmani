@@ -783,11 +783,7 @@
 <script>
 
   $(function () {
-	/*rice_data.push({x: "2020-03-31 21:15:43", y: 1319});
-	price_data.push({x: "2020-03-31 21:16:44", y: 1319});
-	price_data.push({x: "2020-03-31 21:17:43", y: 1319});
-	price_data.push({x: "2020-03-31 21:18:43", y: 1319});*/
-    var url = "{{ route('price.get_with_id', $productId) }}";
+    var url = "{{ route('price.get_with_id', $productId, false) }}";
     console.log( url );
 	var price_data = [];
 	var name = "{{ $title }}";
