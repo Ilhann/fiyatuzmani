@@ -792,9 +792,7 @@
 
 	axios.get(url)
 		.then(function (response) {
-			console.log(response.data);
 			response.data.forEach(function(row){
-				console.log(typeof row.price);
 				price_data.push({x: row.pricedate, y: row.price});
 			});
 			create_chart(price_data, name);

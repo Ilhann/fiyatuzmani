@@ -793,9 +793,7 @@
     axios.get("/search/product?query=" + $("#searchbar").val())
       .then(function (response) {
         data = [];
-        console.log(response.data);
         response.data.forEach(function(row){
-          console.log(row);
           title_html = "<a href='product/" + row.id + "'>" + row.title + "</a>";
           data.push([title_html, row.provider, row.last_receive]);
         });
