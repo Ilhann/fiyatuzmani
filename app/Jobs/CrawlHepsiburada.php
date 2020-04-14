@@ -33,7 +33,6 @@ class CrawlHepsiburada implements ShouldQueue
      */
     public function handle()
     {
-        $this->product = \App\Product::find($this->id);
         if(!$this->product) return;
         /*$client = new \Goutte\Client();
         $client->setHeader('User-Agent', env('HB_USERAGENT', "FUZM/v1.0r3 Discovery"));*/
@@ -45,6 +44,9 @@ class CrawlHepsiburada implements ShouldQueue
             
         } catch (\Exception $e) {
             $product_price = 0;
+            $this->product->last_receive = now();
+            $this->product->save();
+            return;
         }
 
         try {

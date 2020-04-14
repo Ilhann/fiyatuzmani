@@ -781,8 +781,8 @@
 <script src="/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/js/demo.js"></script>
-<script src="{{ asset('js/axios.min.js') }}"></script>
-<script src="{{ asset('js/jquery.loading.min.js') }}"></script>
+<script src="/js/axios.min.js"></script>
+<script src="/js/jquery.loading.min.js"></script>
 <!-- page script -->
 <script>
 
