@@ -40,32 +40,22 @@ class DispatchCrawlers extends Command
      */
     public function handle()
     {
-        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43000))->where('source', '=', 'url')->where('provider', '=', 'trendyol')->orderBy('last_receive', 'asc')->limit(10)->get();
+        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43000))->where('last_dispatch', "<", now()->subSeconds(7000))->where('source', '=', 'url')->where('provider', '=', 'trendyol')->orderBy('last_receive', 'asc')->limit(7)->get();
         $trendyol_dispatch_delay = 10;
         foreach ($products as $product) {
             $product->last_dispatch = now();
             $product->save();
-            $trendyol_dispatch_delay += 3;
+            $trendyol_dispatch_delay += 4;
             CrawlTrendyol::dispatch($product)->delay(now()->addSeconds($trendyol_dispatch_delay));
             //Log::debug("TRENDYOL dispatching ".$product->id);
         }
-        return;
-        $products = \App\Product::where('last_receive', "<", now()->subSeconds(3612))->where('source', '=', 'url')->get();
+        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43000))->where('last_dispatch', "<", now()->subSeconds(7000))->where('source', '=', 'url')->where('provider', '=', 'hepsiburada')->orderBy('last_receive', 'asc')->limit(6)->get();
+        $hb_dispatch_delay = 10;
         foreach ($products as $product) {
             $product->last_dispatch = now();
             $product->save();
-            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds(3));
-            //Log::debug("dispatching ".$product->id);
-        }
-        
-        $rand_number = random_int(12, 20);
-        $products = \App\Product::where('last_receive', "<", now()->subSeconds(43214))->where('source', '=', 'discovery')->orderBy('last_receive', 'asc')->limit($rand_number)->get();
-        foreach ($products as $product) {
-            $dispatch_delay = random_int(5, 40);
-            $product->last_dispatch = now();
-            $product->save();
-            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds($dispatch_delay));
-            //Log::debug("(DISCOVERY PRODUCT)dispatching ".$product->id);
+            $hb_dispatch_delay += 3;
+            CrawlHepsiburada::dispatch($product->id)->delay(now()->addSeconds($hb_dispatch_delay));
         }
     }
 }

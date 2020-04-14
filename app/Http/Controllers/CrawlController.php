@@ -9,8 +9,7 @@ class CrawlController extends Controller
 {
     //
     public function add_new_hepsiburada(Request $request){
-        $client = new Client();
-        $useragent = env('HB_USERAGENT', "FUZM/v1.0r3 Discovery");
+        $client = GetGoutteForCrawler();
         $client->setHeader('User-Agent', $useragent);
         $crawler = $client->request('GET', $request->get('url'));
         $price = $crawler->filter('#offering-price')->attr('content');
@@ -33,8 +32,7 @@ class CrawlController extends Controller
     }
 
     public function add_new_trendyol(Request $request){
-        $client = new Client();
-        $useragent = env('HB_USERAGENT', "FUZM/v1.0r3 Discovery");
+        $client = GetGoutteForCrawler();
         $client->setHeader('User-Agent', $useragent);
         $crawler = $client->request('GET', $request->get('url'));
         $price = $crawler->filter('meta[name="twitter:data1"]')->attr('content');

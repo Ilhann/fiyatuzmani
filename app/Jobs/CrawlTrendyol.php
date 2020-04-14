@@ -35,8 +35,9 @@ class CrawlTrendyol implements ShouldQueue
     public function handle()
     {
         if(!$this->product) return;
-        $client = new \Goutte\Client();
-        $client->setHeader('User-Agent', env('HB_USERAGENT', "FUZM/v1.0r3 Discovery"));
+        /*$client = new \Goutte\Client();
+        $client->setHeader('User-Agent', env('HB_USERAGENT', "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"));*/
+        $client = GetGoutteForCrawler();
         $crawler = $client->request('GET', $this->product->productURL);
 
         try {
@@ -53,6 +54,5 @@ class CrawlTrendyol implements ShouldQueue
         $price->save();
         $this->product->last_receive = now();
         $this->product->save();
-        Log::debug("Product ID: ". $this->product->id . " (". $this->product->title.") -> ". $price->price ."₺ saved.");
     }
 }

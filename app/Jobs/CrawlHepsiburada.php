@@ -15,15 +15,15 @@ class CrawlHepsiburada implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $id;
+    protected $product;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct($product)
     {
-        $this->id = $id;
+        $this->product = $product;
     }
 
     /**
@@ -33,47 +33,38 @@ class CrawlHepsiburada implements ShouldQueue
      */
     public function handle()
     {
-        Log::debug($this->id);
-        $prd = \App\Product::find($this->id);
-        if(!$prd) return;
-        Log::debug($prd->id ." has arrived. Lets crawl!");
-        $client = new \Goutte\Client();
-        Log::debug($prd->productURL);
-        $client->setHeader('User-Agent', env('HB_USERAGENT', "FUZM/v1.0r3 Discovery"));
-        $crawler = $client->request('GET', $prd->productURL);
+        $this->product = \App\Product::find($this->id);
+        if(!$this->product) return;
+        /*$client = new \Goutte\Client();
+        $client->setHeader('User-Agent', env('HB_USERAGENT', "FUZM/v1.0r3 Discovery"));*/
+        $client = GetGoutteForCrawler();
+        $crawler = $client->request('GET', $this->product->productURL);
 
         try {
-            Log::debug($prd->id ." getting price content.");
             $product_price = $crawler->filter('#offering-price')->attr('content');
             
         } catch (\Exception $e) {
-            Log::debug("Content could not fetched. Details:". $e->getMessage());
             $product_price = 0;
         }
 
         try {
-            if(true/*$prd->productid == "" || $prd->productid == null*/){
-                $prd->productid = $crawler->filter('input[name=productId]')->attr('value');
+            if(true/*$this->product->productid == "" || $this->product->productid == null*/){
+                $this->product->productid = $crawler->filter('input[name=productId]')->attr('value');
             }
         } catch (\Exception $e) {
             //throw $th;
         }
         
-        Log::debug("Price Found: ".$product_price);
-        Log::debug($prd->id ." crawl complete. Creating database entry");
 
         $price = new \App\Price;
         $price->price = doubleval($product_price);
-        $price->productID = $prd->id;
+        $price->productID = $this->product->id;
         $price->pricedate = now();
-        Log::debug($prd->id ." saving to databse...");
         $price->save();
-        $prd->last_receive = now();
-        $prd->save();
-        Log::debug($prd->id ." saved.");
+        $this->product->last_receive = now();
+        $this->product->save();
 
-        HepsiburadaDiscoveryService::dispatch($prd->productid);
-        Log::debug("Dispatched discovery service for:". $prd->productid);
+        //HepsiburadaDiscoveryService::dispatch($this->product->productid);
 
 
     }
