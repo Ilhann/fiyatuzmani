@@ -42,13 +42,13 @@ return [
         ],
 
         'single' => [
-            'driver' => 'errorlog',
+            'driver' => env('log_driver', 'single'),
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
-            'driver' => 'errorlog',
+            'driver' => env('log_driver', 'daily'),
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 14,
