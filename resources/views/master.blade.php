@@ -304,7 +304,7 @@
 </script>
 @yield('js-content')
 
-@if (App::environment() == 'Production')
+@if (App::environment() == 'production')
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166665626-1"></script>
 <script>
