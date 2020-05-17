@@ -236,7 +236,7 @@
       Anything you want
     </div>
     
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>FiyatUzmani &copy; 2020.</strong> Contact: <a href="mailto:info@fiyatuzmani.com">info@fiyatuzmani.com</a>
   </footer>
 </div>
 
