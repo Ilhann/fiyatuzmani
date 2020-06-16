@@ -77,7 +77,7 @@
 
       console.log(top10_products);
       top10_products.forEach(function(row){
-        var str = `<tr><td><img src="/img/default-150x150.png" alt="${row.title}" class="img-circle img-size-32 mr-2"><a href="/_price/${row.id}">${row.title}</a></td><td>${row.provider}</td><td>${row.created_at}</td></tr>`;
+        var str = `<tr><td><a href="/_price/${row.id}">${row.title}</a></td><td>${row.provider}</td><td>${row.created_at}</td></tr>`;
         $("#products-tbl").append(str);
       });
 
