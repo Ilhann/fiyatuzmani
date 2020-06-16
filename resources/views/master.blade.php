@@ -20,7 +20,7 @@
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link"><img style="width: 200px; margin-top: -13px;" src="/img/fiyatuzmani.png"></a>
+        <a href="/" class="nav-link"><img style="width: 200px; margin-top: -13px;" src="/img/fiyatuzmani.png"></a>
       </li>
     </ul>
 
