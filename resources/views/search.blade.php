@@ -9,13 +9,13 @@
 @stop
 
 @section('html-content')
-    
+
     <section class="content">
       <div class="row">
         <div class="col-12">
 
           <div class="card">
-            
+
             <div class="card-body">
               <table id="product_search_results" class="table table-bordered table-striped">
                 <thead>
@@ -26,17 +26,17 @@
                 </tr>
                 </thead>
                 <tbody>
-               
+
                 </tbody>
               </table>
             </div>
-            
+
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </section>
 @stop
 

@@ -40,12 +40,10 @@
               <table class="table table-striped table-valign-middle">
                 <thead>
                 <tr>
-                  <th>Ürün</th>
-                  <th>Sağlayıcı</th>
-                  <th>Eklenme Tarihi</th>
+                  <th>Arama</th>
                 </tr>
                 </thead>
-                <tbody id="products-tbl">
+                <tbody id='searches'>
 
                 </tbody>
               </table>
@@ -168,6 +166,14 @@
         var chart = new ApexCharts(document.querySelector("#lineChart"), options);
         chart.render();
 	}
+
+    var _searches = [];
+    _searches = localStorage.getObj('searches');
+
+    _searches.forEach(function(value){
+        $("#searches").append('<tr><td><a href="search?query='+value+'">'+value+'</a></td></tr>')
+    });
+
 </script>
 @stop
 </body>

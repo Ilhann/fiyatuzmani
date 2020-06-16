@@ -112,10 +112,29 @@
     }
   });
 
+        Storage.prototype.setObj = function(key, obj) {
+            return this.setItem(key, JSON.stringify(obj))
+        }
+        Storage.prototype.getObj = function(key) {
+            return JSON.parse(this.getItem(key))
+        }
+
   function search(e){
     var search_string = $("#search-content").val();
 
     if(search_string === "") return;
+
+     if (localStorage.getObj("searches") === null) {
+        localStorage.setObj("searches", [search_string]);
+      }else{
+        var searches = [];
+        searches = localStorage.getObj("searches");
+        if(!searches.includes(search_string)){
+            searches.push(search_string);
+            localStorage.setObj("searches", searches);
+        }
+      }
+
     $('#product_search_results').loading();
     axios.get("/search/product?query=" + search_string)
       .then(function (response) {
