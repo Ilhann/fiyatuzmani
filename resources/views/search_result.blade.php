@@ -737,7 +737,7 @@
                 </tr>
                 </thead>
                 <tbody>
-               
+
                 </tbody>
               </table>
             </div>
@@ -801,7 +801,7 @@
       });
   }
 
-  
+
 
 
   function draw_datatable(data){

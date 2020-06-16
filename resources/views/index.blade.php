@@ -8,53 +8,52 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      
-      <div class="col-lg-6">
-        
-        <div class="card card-info">
-          <div class="card-header">
-            <h3 class="card-title">Last Received Price</h3>
-          </div>
-          <div class="card-body">
-            <div class="chart">
-              <div id="lineChart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
+
       <div class="col-lg-6">
         <div class="card">
           <div class="card-header border-0">
-            <h3 class="card-title">Recently Added Products</h3>
-            <div class="card-tools">
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-download"></i>
-              </a>
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-bars"></i>
-              </a>
-            </div>
+            <h3 class="card-title">Son Eklenen Ürünler</h3>
           </div>
           <div class="card-body table-responsive p-0">
             <table class="table table-striped table-valign-middle">
               <thead>
               <tr>
-                <th>Product</th>
-                <th>Provider</th>
-                <th>Created At</th>
+                <th>Ürün</th>
+                <th>Sağlayıcı</th>
+                <th>Eklenme Tarihi</th>
               </tr>
               </thead>
               <tbody id="products-tbl">
-              
+
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      
+
+      <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Son Yapılan Aramalar</h3>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                <tr>
+                  <th>Ürün</th>
+                  <th>Sağlayıcı</th>
+                  <th>Eklenme Tarihi</th>
+                </tr>
+                </thead>
+                <tbody id="products-tbl">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
     </div>
-    
+
   </div>
   <!-- /.container-fluid -->
 </div>
@@ -86,8 +85,8 @@
 
 		});
 
-    
-    
+
+
     //$("#products-tbl").append();
     var url = "{{ route('price.get_with_id', $productId, false) }}";
     var price_data = [];

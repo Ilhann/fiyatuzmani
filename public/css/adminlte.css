@@ -11389,7 +11389,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   body:not(.sidebar-mini-md) .main-footer,
   body:not(.sidebar-mini-md) .main-header {
     transition: margin-left 0.3s ease-in-out;
-    margin-left: 250px;
+    /* margin-left: 250px; */
   }
 }
 
@@ -11424,7 +11424,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   .sidebar-mini-md .main-footer,
   .sidebar-mini-md .main-header {
     transition: margin-left 0.3s ease-in-out;
-    margin-left: 250px;
+    /* margin-left: 250px; */
   }
 }
 
@@ -31094,3 +31094,22 @@ a.text-muted:hover {
   color: #ffffff;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+
+#search-form{
+    margin: 0;
+    width: 100%;
+    padding: 15px;
+}
+
+#search-form > .input-group{
+    width: 100%;
+    border: 1px dashed #17a2b8;
+    border-radius: 5px;
+}
+
+#search-form > .input-group > input{
+    padding: 25px;
+    font-size: 20px;
+    color: #17a2b8;
+}
