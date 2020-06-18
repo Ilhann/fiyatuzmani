@@ -17,3 +17,9 @@ Route::get('/trendyol/add_product', "CrawlController@add_new_trendyol");
 Route::get('/price/{id}', ['uses' => "PriceController@get_with_id"])->name('price.get_with_id');
 Route::get('/search/product', "ProductController@search_with_name");
 Route::get('/product/latest_10', "ProductController@latest_10_products")->name('product.latest_10');
+
+Route::get('/product/add', function () {
+    return view('add_product');
+});
+
+Route::post('/product/add', "ProductController@add");
