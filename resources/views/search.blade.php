@@ -43,7 +43,7 @@
           <div class="card text-center">
             <!-- /.card-header -->
             <div class="card-body">
-              Aradığınız ürünü bulamadıysanız mı? Eklemek için <a href="product/add"> tıklayın </a>
+              Aradığınız ürünü bulamadınız mı? Eklemek için <a href="product/add"> buraya tıklayın </a>
             </div>
             <!-- /.card-body -->
           </div>
