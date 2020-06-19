@@ -37,6 +37,22 @@
 
       </div>
 
+      <div class="row">
+        <div class="col-12">
+
+          <div class="card text-center">
+            <!-- /.card-header -->
+            <div class="card-body">
+              Aradığınız ürünü bulamadıysanız mı? Eklemek için <a href="product/add"> tıklayın </a>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
     </section>
 @stop
 
