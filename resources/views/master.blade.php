@@ -175,6 +175,7 @@
 
   gtag('config', 'UA-166665626-1');
 </script>
+<script data-ad-client="ca-pub-6525252529923961" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 @endif
 </body>
 </html>
